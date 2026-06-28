@@ -6,6 +6,9 @@
 **/node_modules/
 **/target/
 
+# IntelliJ Platform Gradle Plugin local cache (generated)
+**/.intellijPlatform/
+
 # IDE
 .idea/
 *.iml
