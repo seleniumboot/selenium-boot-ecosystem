@@ -39,6 +39,9 @@ dependencies {
                 .split(',').map(String::trim).filter(String::isNotEmpty)
         )
 
+        // Required by the code-instrumentation step (instrumentCode / buildPlugin).
+        instrumentationTools()
+
         pluginVerifier()
         zipSigner()
     }

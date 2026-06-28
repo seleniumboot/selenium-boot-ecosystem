@@ -21,6 +21,10 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- New Project wizard: "Selenium Boot" generator. -->
         <moduleBuilder builderClass="io.github.seleniumboot.idea.wizard.SeleniumBootModuleBuilder"/>
+
+        <!-- Run/debug configuration: run the suite via Maven with profile/test knobs. -->
+        <configurationType
+                implementation="io.github.seleniumboot.idea.run.SeleniumBootRunConfigurationType"/>
     </extensions>
 
     <!-- JSON Schema engine: bind selenium-boot.schema.json to selenium-boot.yml. -->
@@ -28,15 +32,4 @@
         <ProviderFactory
                 implementation="io.github.seleniumboot.idea.config.SeleniumBootSchemaProviderFactory"/>
     </extensions>
-
-    <!--
-      ROADMAP — register as the modules are built (see README.md):
-
-      <extensions defaultExtensionNs="com.intellij">
-        <configurationType
-            implementation="io.github.seleniumboot.idea.run.SeleniumBootRunConfigurationType"/>
-        <runLineMarkerContributor language="JAVA"
-            implementationClass="io.github.seleniumboot.idea.run.SeleniumBootRunLineMarkerContributor"/>
-      </extensions>
-    -->
 </idea-plugin>

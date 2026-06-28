@@ -14,7 +14,7 @@ IntelliJ IDEA Community 2024.2+ (Java 17).
 |---|---|---|
 | `selenium-boot.yml` schema (completion + validation + docs) | ✅ shipped | Zero custom UI — a JSON Schema bound via the JSON Schema SPI. |
 | New Project wizard (Spring-Initializr style) | ✅ shipped | Scaffolds `pom.xml` (pinned dep version), `selenium-boot.yml`, `testng.xml`, a sample `BaseTest` test + `BasePage` page object. Options: group/artifact, base URL, browser, headless, version. |
-| Selenium Boot run/debug configuration | 🚧 roadmap | Reuses native test gutters; injects profile / headless / env. |
+| Selenium Boot run/debug configuration | ✅ shipped | Runs the suite via Maven (`mvnw`/`mvn`) with real knobs: config profile (`-Dselenium.boot.profile`), config file (`-Dselenium.boot.config`), test filter (`-Dtest`), goals, extra args. Native test gutters left untouched. |
 
 Everything AI-related (test generation, failure analysis, locator suggestions)
 ships as **MCP server registration docs** for JetBrains AI Assistant — not
@@ -57,10 +57,16 @@ intellij-plugin/
     │   ├── config/                       # JSON Schema wiring  ✅
     │   │   ├── SeleniumBootSchemaProvider.java
     │   │   └── SeleniumBootSchemaProviderFactory.java
-    │   └── wizard/                        # New Project wizard  ✅
-    │       ├── SeleniumBootModuleBuilder.java   # wizard entry + scaffolding
-    │       ├── SeleniumBootWizardStep.java      # options form
-    │       └── ProjectScaffold.java             # file templates (no platform deps)
+    │   ├── wizard/                        # New Project wizard  ✅
+    │   │   ├── SeleniumBootModuleBuilder.java   # wizard entry + scaffolding
+    │   │   ├── SeleniumBootWizardStep.java      # options form
+    │   │   └── ProjectScaffold.java             # file templates (no platform deps)
+    │   └── run/                           # Run/debug configuration  ✅
+    │       ├── SeleniumBootRunConfigurationType.java
+    │       ├── SeleniumBootRunConfigurationFactory.java
+    │       ├── SeleniumBootRunConfiguration.java   # state + persistence
+    │       ├── SeleniumBootSettingsEditor.java     # settings UI
+    │       └── SeleniumBootRunState.java           # builds the mvn command
     └── resources/
         ├── META-INF/plugin.xml
         └── schemas/selenium-boot.schema.json
