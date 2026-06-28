@@ -59,10 +59,19 @@ intellijPlatform {
         }
     }
 
-    // `./gradlew verifyPlugin` checks API compatibility against recent IDEs.
+    // `./gradlew verifyPlugin` checks API compatibility. We verify against the
+    // locally-installed IDE when present (no download, and it's the build users
+    // here actually run); fall back to recommended() in CI.
     pluginVerification {
         ides {
-            recommended()
+            val localIde = providers.environmentVariable("SB_VERIFY_IDE_HOME")
+                .orElse("/snap/intellij-idea-ultimate/current")
+            val ideDir = file(localIde.get())
+            if (ideDir.resolve("build.txt").isFile) {
+                local(ideDir)
+            } else {
+                recommended()
+            }
         }
     }
 }
