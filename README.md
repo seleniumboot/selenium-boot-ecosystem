@@ -1,38 +1,55 @@
 # Selenium Boot — Ecosystem
 
-Developer tooling around the [Selenium Boot](https://seleniumboot.github.io)
-automation framework. The core library (the Maven Central JAR
-`io.github.seleniumboot:selenium-boot`) lives in its own repository; this
-monorepo holds the **IDE and AI tooling** that sits on top of it.
+Home for **new, greenfield IDE tooling** around the
+[Selenium Boot](https://seleniumboot.github.io) automation framework.
+
+The "ecosystem" is the [`seleniumboot`](https://github.com/seleniumboot) GitHub
+org as a whole — several repositories, cross-linked — not a single folder.
+Mature, already-published projects keep their own repos and release pipelines;
+this monorepo only houses tooling that doesn't yet have one.
 
 > Goal: don't build a generic Selenium toolbox — build an experience
 > specifically for the Selenium Boot ecosystem.
 
-## Projects
+## Ecosystem map
+
+### In this monorepo (greenfield IDE tooling)
 
 | Directory | What it is | Status |
 |---|---|---|
 | [`intellij-plugin/`](intellij-plugin/) | IntelliJ IDEA plugin — `selenium-boot.yml` schema, project wizard, run config | 🟢 active (MVP) |
-| `vscode-extension/` | VS Code extension (Gherkin nav, step generation, run) | ⚪ planned / to migrate |
-| `mcp-server/` | `seleniumboot-mcp` server (84 tools) — AI test generation & control | ⚪ planned / to migrate |
+| `vscode-extension/` | VS Code extension (Gherkin nav, step generation, run) | ⚪ planned (only if greenfield; otherwise its own repo) |
 
-Each project is independently buildable and publishable (JetBrains Marketplace,
-VS Code Marketplace, npm) and keeps its own README with build instructions.
+### Sibling repos (own release pipelines — not housed here)
 
-## Why a monorepo
+| Repo | What it is | Publishes to |
+|---|---|---|
+| [`seleniumboot/selenium-boot`](https://github.com/seleniumboot/selenium-boot) | The core framework JAR `io.github.seleniumboot:selenium-boot` | Maven Central |
+| [`seleniumboot/selenium-mcp`](https://github.com/seleniumboot/selenium-mcp) | `seleniumboot-mcp` server (84 tools) — AI test generation & control | PyPI |
 
-- One place for the whole tooling story; shared docs, issues, and CI.
-- The tools share concepts (config schema, generators, MCP) and evolve together
-  with the framework's releases.
-- The core library stays a clean, dependency-light JAR — IDE/Gradle/Node
-  tooling never leaks into it.
+Each repo is independently buildable, versioned, and published, and keeps its
+own README.
+
+## What belongs where
+
+Rule of thumb:
+
+- **Already published with its own release pipeline → its own repo.**
+  (the core JAR on Maven Central, the MCP server on PyPI).
+- **Brand-new with no repo or pipeline yet → this monorepo.**
+  (the IntelliJ plugin today).
+
+This keeps the core library a clean, dependency-light JAR — IDE/Gradle/Node
+tooling never leaks into it — and avoids rewriting the history or release
+machinery of projects that already have a home.
 
 ## Relationship to the core library
 
 These tools target a specific Selenium Boot release line. When the framework
 publishes a new version, the tooling here is updated to match (e.g. the
 IntelliJ project wizard pins the dependency version, the YAML schema tracks new
-config keys).
+config keys). The IntelliJ plugin reuses the MCP server's generators rather than
+re-implementing them.
 
 ## Getting started
 
