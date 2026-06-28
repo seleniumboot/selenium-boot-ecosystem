@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>io.github.seleniumboot.idea</id>
     <name>Selenium Boot</name>
-    <vendor email="panjatan.tech@gmail.com" url="https://seleniumboot.github.io">Selenium Boot</vendor>
+    <vendor email="seleniumboot.dev@gmail.com" url="https://seleniumboot.github.io">Selenium Boot</vendor>
 
     <description><![CDATA[
         IntelliJ IDEA support for the <b>Selenium Boot</b> automation framework.
