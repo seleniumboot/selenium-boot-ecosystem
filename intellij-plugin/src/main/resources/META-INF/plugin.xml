@@ -1,0 +1,41 @@
+<idea-plugin>
+    <id>io.github.seleniumboot.idea</id>
+    <name>Selenium Boot</name>
+    <vendor email="panjatan.tech@gmail.com" url="https://seleniumboot.github.io">Selenium Boot</vendor>
+
+    <description><![CDATA[
+        IntelliJ IDEA support for the <b>Selenium Boot</b> automation framework.
+        <ul>
+          <li>Schema-backed completion &amp; validation for <code>selenium-boot.yml</code></li>
+          <li>New Project wizard (Spring-Initializr style) — <i>roadmap</i></li>
+          <li>Selenium Boot run/debug configuration — <i>roadmap</i></li>
+        </ul>
+    ]]></description>
+
+    <!-- Core platform + JSON Schema SPI + YAML language. -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.json</depends>
+    <depends>org.jetbrains.plugins.yaml</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- nothing yet; platform extensions go here -->
+    </extensions>
+
+    <!-- JSON Schema engine: bind selenium-boot.schema.json to selenium-boot.yml. -->
+    <extensions defaultExtensionNs="com.jetbrains.jsonSchema">
+        <ProviderFactory
+                implementation="io.github.seleniumboot.idea.config.SeleniumBootSchemaProviderFactory"/>
+    </extensions>
+
+    <!--
+      ROADMAP — register as the modules are built (see README.md):
+
+      <extensions defaultExtensionNs="com.intellij">
+        <moduleBuilder builderClass="io.github.seleniumboot.idea.wizard.SeleniumBootModuleBuilder"/>
+        <configurationType
+            implementation="io.github.seleniumboot.idea.run.SeleniumBootRunConfigurationType"/>
+        <runLineMarkerContributor language="JAVA"
+            implementationClass="io.github.seleniumboot.idea.run.SeleniumBootRunLineMarkerContributor"/>
+      </extensions>
+    -->
+</idea-plugin>

@@ -1,0 +1,215 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://seleniumboot.github.io/schemas/selenium-boot.schema.json",
+  "title": "Selenium Boot configuration",
+  "description": "Schema for selenium-boot.yml — the optional, convention-over-configuration file read by ConfigurationLoader. Every section is optional; SeleniumBootDefaults supplies fallbacks.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "browser": {
+      "type": "object",
+      "description": "Browser and WebDriver options.",
+      "additionalProperties": true,
+      "properties": {
+        "name": {
+          "description": "Which browser to launch.",
+          "type": "string",
+          "enum": ["chrome", "firefox", "edge", "safari"],
+          "default": "chrome"
+        },
+        "headless": {
+          "description": "Run without a visible UI. Recommended true in CI.",
+          "type": "boolean",
+          "default": false
+        },
+        "arguments": {
+          "description": "Raw command-line switches passed to the browser, e.g. --start-maximized.",
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "capabilities": {
+          "description": "Arbitrary WebDriver capabilities, e.g. acceptInsecureCerts, pageLoadStrategy.",
+          "type": "object",
+          "additionalProperties": true
+        },
+        "lifecycle": {
+          "description": "When the driver is created/destroyed. per-test = fresh browser per test method; per-suite = one browser shared across the suite.",
+          "type": "string",
+          "enum": ["per-test", "per-suite"],
+          "default": "per-test"
+        },
+        "downloadDir": {
+          "description": "Directory the browser downloads files into.",
+          "type": "string",
+          "default": "./target/downloads"
+        },
+        "captureConsoleErrors": {
+          "description": "Collect browser console errors during each test.",
+          "type": "boolean",
+          "default": false
+        },
+        "failOnConsoleErrors": {
+          "description": "Fail a test if the browser logged console errors.",
+          "type": "boolean",
+          "default": false
+        },
+        "matrix": {
+          "description": "Cross-browser matrix; run the suite against each listed browser.",
+          "type": "array",
+          "items": { "type": "string", "enum": ["chrome", "firefox", "edge", "safari"] }
+        },
+        "device": {
+          "description": "Optional device-emulation profile name, e.g. \"iPhone 14\".",
+          "type": "string"
+        }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "description": "How and where the suite runs.",
+      "additionalProperties": true,
+      "properties": {
+        "mode": {
+          "description": "local = drive a browser on this machine; remote = use a Selenium Grid / cloud provider (gridUrl).",
+          "type": "string",
+          "enum": ["local", "remote"],
+          "default": "local"
+        },
+        "baseUrl": {
+          "description": "Base application URL. Relative navigations resolve against this.",
+          "type": "string",
+          "format": "uri"
+        },
+        "gridUrl": {
+          "description": "Selenium Grid / remote hub URL, e.g. http://localhost:4444/wd/hub. Used when mode = remote.",
+          "type": "string",
+          "format": "uri"
+        },
+        "parallel": {
+          "description": "TestNG parallel strategy.",
+          "type": "string",
+          "enum": ["none", "methods", "classes", "tests", "instances"],
+          "default": "none"
+        },
+        "threadCount": {
+          "description": "Number of parallel threads when parallel != none.",
+          "type": "integer",
+          "minimum": 1,
+          "default": 1
+        },
+        "maxActiveSessions": {
+          "description": "Upper bound on concurrently open browser sessions (back-pressure for grids).",
+          "type": "integer",
+          "minimum": 1,
+          "default": 5
+        }
+      }
+    },
+    "retry": {
+      "type": "object",
+      "description": "Automatic retry of failed tests (@Retryable / RetryListener).",
+      "additionalProperties": true,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "maxAttempts": {
+          "description": "Total attempts per test, including the first run.",
+          "type": "integer",
+          "minimum": 1,
+          "default": 1
+        }
+      }
+    },
+    "timeouts": {
+      "type": "object",
+      "description": "Wait budgets, in seconds.",
+      "additionalProperties": true,
+      "properties": {
+        "explicit": {
+          "description": "Default explicit-wait timeout used by WaitEngine.",
+          "type": "integer",
+          "minimum": 0,
+          "default": 10
+        },
+        "pageLoad": {
+          "description": "Page-load timeout.",
+          "type": "integer",
+          "minimum": 0,
+          "default": 30
+        }
+      }
+    },
+    "ci": {
+      "type": "object",
+      "description": "CI quality gates enforced by BuildThresholdEnforcer.",
+      "additionalProperties": true,
+      "properties": {
+        "failOnPassRateBelow": {
+          "description": "Fail the build if the pass rate (percentage) drops below this value. 0 disables the gate.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "maxFlakyTests": {
+          "description": "Fail the build if more than this many tests are flaky (passed only on retry). -1 disables the gate.",
+          "type": "integer",
+          "minimum": -1
+        }
+      }
+    },
+    "network": {
+      "type": "object",
+      "description": "Network interception / mocking.",
+      "additionalProperties": true,
+      "properties": {
+        "interceptEnabled": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "recording": {
+      "type": "object",
+      "description": "Screen recording of test runs.",
+      "additionalProperties": true,
+      "properties": {
+        "enabled": { "type": "boolean", "default": false },
+        "fps": { "type": "integer", "minimum": 1, "default": 2 },
+        "maxDurationSeconds": { "type": "integer", "minimum": 1, "default": 60 }
+      }
+    },
+    "reporting": {
+      "type": "object",
+      "description": "Report adapters.",
+      "additionalProperties": true,
+      "properties": {
+        "allureEnabled": { "type": "boolean", "default": false }
+      }
+    },
+    "notifications": {
+      "type": "object",
+      "description": "Post-run notifications.",
+      "additionalProperties": true,
+      "properties": {
+        "slack": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "webhookUrl": { "type": "string", "format": "uri" },
+            "notifyOnFailureOnly": { "type": "boolean", "default": false }
+          }
+        },
+        "teams": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "webhookUrl": { "type": "string", "format": "uri" },
+            "notifyOnFailureOnly": { "type": "boolean", "default": false }
+          }
+        }
+      }
+    }
+  }
+}
