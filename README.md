@@ -57,6 +57,7 @@ See each project's own `README.md`. For the IntelliJ plugin:
 
 ```bash
 cd intellij-plugin
-gradle wrapper --gradle-version 8.10   # one-time
+# Gradle 8.10 needs JDK 17–21 (not Java 22+):
+export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
 ./gradlew runIde
 ```

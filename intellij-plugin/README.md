@@ -22,10 +22,15 @@ bespoke plugin code — until the basics have users.
 
 ## Build & run
 
-```bash
-# one-time: generate the Gradle wrapper
-gradle wrapper --gradle-version 8.10
+The Gradle wrapper is committed, so no local Gradle install is needed.
 
+> **JDK note:** Gradle 8.10 runs on JDK 17–21, **not** Java 22+. If your default
+> `java` is newer, point the wrapper at a supported JDK first:
+> ```bash
+> export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+> ```
+
+```bash
 # launch a sandbox IDE with the plugin installed
 ./gradlew runIde
 
