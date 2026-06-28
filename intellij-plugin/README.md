@@ -45,6 +45,26 @@ To try the schema: in the sandbox IDE, open any `selenium-boot.yml`. You should
 get completion for keys like `browser.name` (enum: chrome/firefox/edge/safari),
 `execution.parallel`, validation on out-of-range numbers, and hover docs.
 
+## Publishing to the JetBrains Marketplace
+
+CI (`.github/workflows/intellij-plugin.yml`) builds and verifies every push.
+Publishing is a manual, token-gated step:
+
+```bash
+# Permanent token from https://hub.jetbrains.com (Marketplace publishing scope)
+export INTELLIJ_PLATFORM_PUBLISH_TOKEN=...   # required
+
+# Optional plugin signing (recommended) — https://plugins.jetbrains.com/docs/intellij/plugin-signing.html
+export INTELLIJ_SIGNING_CERT_CHAIN=/path/chain.crt
+export INTELLIJ_SIGNING_PRIVATE_KEY=/path/private.pem
+export INTELLIJ_SIGNING_PASSWORD=...
+
+./gradlew publishPlugin
+```
+
+The **first** submission for a new plugin ID goes through JetBrains manual
+moderation (typically a couple of days) before it appears on the Marketplace.
+
 ## Layout
 
 ```

@@ -4,13 +4,32 @@
     <vendor email="seleniumboot.dev@gmail.com" url="https://seleniumboot.github.io">Selenium Boot</vendor>
 
     <description><![CDATA[
-        IntelliJ IDEA support for the <b>Selenium Boot</b> automation framework.
+        <p>IntelliJ IDEA support for <a href="https://seleniumboot.github.io"><b>Selenium Boot</b></a>
+        — the zero-boilerplate, Spring-Boot-style Selenium automation framework.</p>
+
+        <p>Go from nothing to a running Selenium Boot test without leaving the IDE:</p>
         <ul>
-          <li>Schema-backed completion &amp; validation for <code>selenium-boot.yml</code></li>
-          <li>New Project wizard (Spring-Initializr style) — <i>roadmap</i></li>
-          <li>Selenium Boot run/debug configuration — <i>roadmap</i></li>
+          <li><b>New Project wizard</b> — scaffold a ready-to-run Maven + TestNG project:
+              <code>pom.xml</code> (pinned dependency), a starter <code>selenium-boot.yml</code>,
+              <code>testng.xml</code>, and a sample test &amp; page object.</li>
+          <li><b>Config completion &amp; validation</b> — schema-backed editing for
+              <code>selenium-boot.yml</code>: completion, enum validation, and inline docs for every key.</li>
+          <li><b>Run configuration</b> — run the suite via Maven with first-class Selenium Boot knobs:
+              config profile, config file, test filter, goals, and extra arguments.</li>
         </ul>
+
+        <p>This plugin focuses on the Selenium Boot experience specifically; it does not replace
+        IntelliJ's built-in TestNG/JUnit run gutters or Cucumber support.</p>
     ]]></description>
+
+    <change-notes><![CDATA[
+        <p><b>0.1.0</b> — Initial release.</p>
+        <ul>
+          <li>New Project wizard for Selenium Boot (Maven + TestNG) with a sample test and page object.</li>
+          <li>JSON-Schema-backed completion, validation, and docs for <code>selenium-boot.yml</code>.</li>
+          <li>"Selenium Boot" run/debug configuration (config profile, config file, test filter, goals).</li>
+        </ul>
+    ]]></change-notes>
 
     <!-- Core platform + Java (module builder) + JSON Schema SPI + YAML language. -->
     <depends>com.intellij.modules.platform</depends>

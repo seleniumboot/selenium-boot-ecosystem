@@ -59,9 +59,9 @@ intellijPlatform {
         }
     }
 
-    // `./gradlew verifyPlugin` checks API compatibility. We verify against the
+    // `./gradlew verifyPlugin` checks API compatibility. Verify against the
     // locally-installed IDE when present (no download, and it's the build users
-    // here actually run); fall back to recommended() in CI.
+    // here actually run); otherwise pin to the build target so CI is deterministic.
     pluginVerification {
         ides {
             val localIde = providers.environmentVariable("SB_VERIFY_IDE_HOME")
@@ -70,9 +70,29 @@ intellijPlatform {
             if (ideDir.resolve("build.txt").isFile) {
                 local(ideDir)
             } else {
-                recommended()
+                ide(IntelliJPlatformType.IntellijIdeaCommunity,
+                    providers.gradleProperty("platformVersion").get())
             }
         }
+    }
+
+    // `./gradlew publishPlugin` uploads to the JetBrains Marketplace.
+    // Token comes from a permanent token created at https://hub.jetbrains.com.
+    publishing {
+        token = providers.environmentVariable("INTELLIJ_PLATFORM_PUBLISH_TOKEN")
+        // First release goes to the default (stable) channel.
+        channels = listOf("default")
+    }
+
+    // Optional plugin signing (recommended by JetBrains). Configured only when
+    // the signing env vars are present, so unsigned local builds still work.
+    // See: https://plugins.jetbrains.com/docs/intellij/plugin-signing.html
+    signing {
+        certificateChainFile = providers.environmentVariable("INTELLIJ_SIGNING_CERT_CHAIN")
+            .map { file(it) }.orNull
+        privateKeyFile = providers.environmentVariable("INTELLIJ_SIGNING_PRIVATE_KEY")
+            .map { file(it) }.orNull
+        password = providers.environmentVariable("INTELLIJ_SIGNING_PASSWORD").orNull
     }
 }
 
