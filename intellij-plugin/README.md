@@ -13,7 +13,7 @@ IntelliJ IDEA Community 2024.2+ (Java 17).
 | Feature | Status | Notes |
 |---|---|---|
 | `selenium-boot.yml` schema (completion + validation + docs) | ✅ shipped | Zero custom UI — a JSON Schema bound via the JSON Schema SPI. |
-| New Project wizard (Spring-Initializr style) | 🚧 roadmap | Scaffolds `pom.xml` (correct dep version), `selenium-boot.yml`, a `BaseTest` subclass + sample page object. |
+| New Project wizard (Spring-Initializr style) | ✅ shipped | Scaffolds `pom.xml` (pinned dep version), `selenium-boot.yml`, `testng.xml`, a sample `BaseTest` test + `BasePage` page object. Options: group/artifact, base URL, browser, headless, version. |
 | Selenium Boot run/debug configuration | 🚧 roadmap | Reuses native test gutters; injects profile / headless / env. |
 
 Everything AI-related (test generation, failure analysis, locator suggestions)
@@ -54,24 +54,30 @@ intellij-plugin/
 ├── gradle.properties
 └── src/main/
     ├── java/io/github/seleniumboot/idea/
-    │   └── config/                       # JSON Schema wiring  ✅
-    │       ├── SeleniumBootSchemaProvider.java
-    │       └── SeleniumBootSchemaProviderFactory.java
+    │   ├── config/                       # JSON Schema wiring  ✅
+    │   │   ├── SeleniumBootSchemaProvider.java
+    │   │   └── SeleniumBootSchemaProviderFactory.java
+    │   └── wizard/                        # New Project wizard  ✅
+    │       ├── SeleniumBootModuleBuilder.java   # wizard entry + scaffolding
+    │       ├── SeleniumBootWizardStep.java      # options form
+    │       └── ProjectScaffold.java             # file templates (no platform deps)
     └── resources/
         ├── META-INF/plugin.xml
         └── schemas/selenium-boot.schema.json
 ```
 
-## Roadmap implementation notes
+## Implementation notes
 
-**New Project wizard** — implement a `ModuleBuilder` (or, on newer platforms, a
-`GeneratorNewProjectWizard`) under `…/wizard/`. The generator should emit a
-`pom.xml` pinned to the current `io.github.seleniumboot:selenium-boot` release,
-a starter `selenium-boot.yml`, and a `BaseTest` subclass. Reuse the framework's
-own MCP generators (`generate_java_testng`, `generate_java_page_object`) for the
-sample files rather than re-templating them here. Register via the
-`com.intellij.moduleBuilder` extension point (see the commented block in
-`plugin.xml`).
+**New Project wizard** (`…/wizard/`) — a `ModuleBuilder` registered via the
+`com.intellij.moduleBuilder` extension point. `ProjectScaffold` holds the file
+templates and has no IntelliJ Platform dependencies, so it's trivially testable.
+Templates are pinned to a Selenium Boot version (default
+`ProjectScaffold.DEFAULT_SELENIUM_BOOT_VERSION`) — bump it when the framework
+releases. A future improvement is to source the sample files from the framework's
+own MCP generators (`generate_java_testng`, `generate_java_page_object`) instead
+of local templates.
+
+## Roadmap implementation notes
 
 **Run configuration** — add a `ConfigurationType` + factory under `…/run/` that
 wraps the Maven/TestNG run with Selenium Boot knobs (`-Denv=…`, headless,

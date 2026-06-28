@@ -3,7 +3,6 @@ package io.github.seleniumboot.idea.config;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.jetbrains.jsonSchema.extension.JsonSchemaFileProvider;
 import com.jetbrains.jsonSchema.extension.SchemaType;
-import org.jetbrains.annotations.NlsContexts;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -23,13 +22,13 @@ final class SeleniumBootSchemaProvider implements JsonSchemaFileProvider {
     }
 
     @Override
-    public boolean isAvailableForFile(VirtualFile file) {
+    public boolean isAvailable(VirtualFile file) {
         String name = file.getName();
         return "selenium-boot.yml".equals(name) || "selenium-boot.yaml".equals(name);
     }
 
     @Override
-    public @NlsContexts.Label String getName() {
+    public String getName() {
         return "Selenium Boot";
     }
 

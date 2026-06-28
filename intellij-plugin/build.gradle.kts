@@ -11,9 +11,13 @@ group = providers.gradleProperty("pluginGroup").get()
 version = providers.gradleProperty("pluginVersion").get()
 
 java {
-    // Match the framework: Java 17.
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    // IntelliJ IDEA 2024.2 runs on JDK 21, so plugin bytecode targets 21.
+    // A toolchain (auto-provisioned via the foojay resolver in
+    // settings.gradle.kts) compiles with a real JDK 21 regardless of which
+    // JDK launched Gradle.
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
 repositories {

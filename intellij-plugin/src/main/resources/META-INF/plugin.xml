@@ -12,13 +12,15 @@
         </ul>
     ]]></description>
 
-    <!-- Core platform + JSON Schema SPI + YAML language. -->
+    <!-- Core platform + Java (module builder) + JSON Schema SPI + YAML language. -->
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
     <depends>com.intellij.modules.json</depends>
     <depends>org.jetbrains.plugins.yaml</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- nothing yet; platform extensions go here -->
+        <!-- New Project wizard: "Selenium Boot" generator. -->
+        <moduleBuilder builderClass="io.github.seleniumboot.idea.wizard.SeleniumBootModuleBuilder"/>
     </extensions>
 
     <!-- JSON Schema engine: bind selenium-boot.schema.json to selenium-boot.yml. -->
@@ -31,7 +33,6 @@
       ROADMAP — register as the modules are built (see README.md):
 
       <extensions defaultExtensionNs="com.intellij">
-        <moduleBuilder builderClass="io.github.seleniumboot.idea.wizard.SeleniumBootModuleBuilder"/>
         <configurationType
             implementation="io.github.seleniumboot.idea.run.SeleniumBootRunConfigurationType"/>
         <runLineMarkerContributor language="JAVA"
