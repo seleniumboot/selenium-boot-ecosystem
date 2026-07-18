@@ -1,14 +1,32 @@
-<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 64 64"
+     role="img" aria-label="Selenium Boot">
+  <!--
+    Selenium Boot brand mark — hexagon + stylized "S" + check.
+    Geometry and gradient are kept in sync with the website logo
+    (selenium-boot-website/public/logo.svg). The hexagon is FILLED here
+    rather than outlined so the mark holds contrast on both the light and
+    dark JetBrains Marketplace themes; the website uses the outlined form
+    against a known white background.
+  -->
   <defs>
-    <linearGradient id="sbBg" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#28A745"/>
-      <stop offset="1" stop-color="#15803D"/>
+    <linearGradient id="sbGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4CC15A"/>
+      <stop offset="1" stop-color="#1E5B7B"/>
     </linearGradient>
   </defs>
-  <!-- Rounded-square badge -->
-  <rect x="2" y="2" width="36" height="36" rx="9" fill="url(#sbBg)"/>
-  <!-- Stylised "S" + boot/launch swoosh -->
-  <path d="M25.5 13.2c-1.9-1.4-4.2-2-6.5-1.8-3.1.3-5.6 2.3-5.9 5.1-.3 2.7 1.4 4.6 4.7 5.6l2.6.8c1.7.5 2.4 1.2 2.3 2.2-.1 1.2-1.4 2-3.3 2.1-1.9.1-3.7-.5-5.3-1.8l-1.6 3.1c2 1.5 4.4 2.2 6.9 2.1 3.6-.2 6.3-2.2 6.6-5.2.3-2.8-1.4-4.7-4.9-5.7l-2.5-.7c-1.6-.5-2.3-1.1-2.2-2 .1-1.1 1.3-1.8 3-1.9 1.6-.1 3.2.4 4.5 1.4l1.3-2.9z" fill="#FFFFFF"/>
-  <!-- Launch dot (the "Boot" spark) -->
-  <circle cx="29.5" cy="11" r="2.4" fill="#FFFFFF"/>
+
+  <!-- Hexagon container -->
+  <path d="M32 5 L55.4 18.5 L55.4 45.5 L32 59 L8.6 45.5 L8.6 18.5 Z"
+        fill="url(#sbGrad)" stroke="url(#sbGrad)" stroke-width="3"
+        stroke-linejoin="round"/>
+
+  <!-- Stylized S -->
+  <path d="M31 23 C31 19, 20 19, 20 25 C20 30, 31 30, 31 36 C31 42, 20 42, 20 38"
+        fill="none" stroke="#FFFFFF" stroke-width="5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Check mark -->
+  <path d="M34 33 L39 39 L47 26"
+        fill="none" stroke="#FFFFFF" stroke-width="5"
+        stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
