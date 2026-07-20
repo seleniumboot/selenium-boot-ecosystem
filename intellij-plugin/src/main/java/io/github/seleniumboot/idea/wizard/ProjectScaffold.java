@@ -13,7 +13,7 @@ import java.nio.file.Path;
 final class ProjectScaffold {
 
     /** Selenium Boot release the wizard pins generated projects to. */
-    static final String DEFAULT_SELENIUM_BOOT_VERSION = "3.1.1";
+    static final String DEFAULT_SELENIUM_BOOT_VERSION = "3.2.0";
 
     /** User-supplied options collected by the wizard step. */
     static final class Options {
@@ -86,6 +86,14 @@ final class ProjectScaffold {
 
                 <build>
                     <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-compiler-plugin</artifactId>
+                            <version>3.11.0</version>
+                            <configuration>
+                                <release>${maven.compiler.release}</release>
+                            </configuration>
+                        </plugin>
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-surefire-plugin</artifactId>

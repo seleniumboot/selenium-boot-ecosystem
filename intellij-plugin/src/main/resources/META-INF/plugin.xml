@@ -23,6 +23,13 @@
     ]]></description>
 
     <change-notes><![CDATA[
+        <p><b>0.1.2</b> — Quickstart scaffold fixes.</p>
+        <ul>
+          <li>Generated <code>pom.xml</code> now pins <code>maven-compiler-plugin</code> 3.11.0 with
+              <code>&lt;release&gt;</code>, so a scaffolded project compiles on Maven 3.8.x toolchains
+              instead of failing with "Source option 5 is no longer supported".</li>
+          <li>New projects default to Selenium Boot <code>3.2.0</code>.</li>
+        </ul>
         <p><b>0.1.0</b> — Initial release.</p>
         <ul>
           <li>New Project wizard for Selenium Boot (Maven + TestNG) with a sample test and page object.</li>
