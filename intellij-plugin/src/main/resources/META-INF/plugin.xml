@@ -1,10 +1,10 @@
 <idea-plugin>
     <id>io.github.seleniumboot.idea</id>
     <name>Selenium Boot</name>
-    <vendor email="seleniumboot.dev@gmail.com" url="https://seleniumboot.github.io">Selenium Boot</vendor>
+    <vendor email="seleniumboot.dev@gmail.com" url="https://seleniumboot.com">Selenium Boot</vendor>
 
     <description><![CDATA[
-        <p>IntelliJ IDEA support for <a href="https://seleniumboot.github.io"><b>Selenium Boot</b></a>
+        <p>IntelliJ IDEA support for <a href="https://seleniumboot.com"><b>Selenium Boot</b></a>
         — the zero-boilerplate, Spring-Boot-style Selenium automation framework.</p>
 
         <p>Go from nothing to a running Selenium Boot test without leaving the IDE:</p>
@@ -28,7 +28,7 @@
           <li>Generated <code>pom.xml</code> now pins <code>maven-compiler-plugin</code> 3.11.0 with
               <code>&lt;release&gt;</code>, so a scaffolded project compiles on Maven 3.8.x toolchains
               instead of failing with "Source option 5 is no longer supported".</li>
-          <li>New projects default to Selenium Boot <code>3.2.0</code>.</li>
+          <li>New projects default to Selenium Boot <code>3.9.0</code>.</li>
         </ul>
         <p><b>0.1.0</b> — Initial release.</p>
         <ul>

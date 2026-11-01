@@ -1,6 +1,6 @@
 # Selenium Boot — IntelliJ IDEA plugin
 
-IDE support for the [Selenium Boot](https://seleniumboot.github.io) automation
+IDE support for the [Selenium Boot](https://seleniumboot.com) automation
 framework. Built on the **IntelliJ Platform Gradle Plugin 2.x**, targeting
 IntelliJ IDEA Community 2024.2+ (Java 17).
 

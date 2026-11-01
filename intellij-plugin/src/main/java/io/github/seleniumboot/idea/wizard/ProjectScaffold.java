@@ -13,7 +13,7 @@ import java.nio.file.Path;
 final class ProjectScaffold {
 
     /** Selenium Boot release the wizard pins generated projects to. */
-    static final String DEFAULT_SELENIUM_BOOT_VERSION = "3.2.0";
+    static final String DEFAULT_SELENIUM_BOOT_VERSION = "3.9.0";
 
     /** User-supplied options collected by the wizard step. */
     static final class Options {

@@ -1,7 +1,7 @@
 # Selenium Boot — Ecosystem
 
 Home for **new, greenfield IDE tooling** around the
-[Selenium Boot](https://seleniumboot.github.io) automation framework.
+[Selenium Boot](https://seleniumboot.com) automation framework.
 
 The "ecosystem" is the [`seleniumboot`](https://github.com/seleniumboot) GitHub
 org as a whole — several repositories, cross-linked — not a single folder.
@@ -25,7 +25,7 @@ this monorepo only houses tooling that doesn't yet have one.
 | Repo | What it is | Publishes to |
 |---|---|---|
 | [`seleniumboot/selenium-boot`](https://github.com/seleniumboot/selenium-boot) | The core framework JAR `io.github.seleniumboot:selenium-boot` | Maven Central |
-| [`seleniumboot/selenium-mcp`](https://github.com/seleniumboot/selenium-mcp) | `seleniumboot-mcp` server (84 tools) — AI test generation & control | PyPI |
+| [`seleniumboot/selenium-mcp`](https://github.com/seleniumboot/selenium-mcp) | `seleniumboot-mcp` server (77 tools total; 43 by default) — AI test generation & control | PyPI |
 
 Each repo is independently buildable, versioned, and published, and keeps its
 own README.
